@@ -26,7 +26,7 @@ public class SignInServlet extends HttpServlet {
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
     } else {
       response.setContentType("text/html;charset=utf-8");
-      response.getWriter().println("Authorized: " + login);
+      response.getWriter().println("Authorized: " + request.getParameter("login"));
       response.setStatus(HttpServletResponse.SC_OK);
     }
   }
