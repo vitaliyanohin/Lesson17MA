@@ -15,9 +15,9 @@ public class DBService {
     this.connection = getH2Connection();
   }
 
-  public UserProfile getUser(String name) throws DBException {
+  public UserProfile getUser(String login) throws DBException {
     try {
-      return (new UsersDAO(connection).getUserProfile(name));
+      return (new UsersDAO(connection).getUserProfile(login));
     } catch (SQLException e) {
         throw new DBException(e);
     }

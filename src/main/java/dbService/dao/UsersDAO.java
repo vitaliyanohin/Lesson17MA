@@ -14,9 +14,9 @@ public class UsersDAO {
     this.executor = new Executor(connection);
   }
 
-  public UserProfile getUserProfile(String name) throws SQLException {
+  public UserProfile getUserProfile(String login) throws SQLException {
     return executor.execQuery("select * from users where user_name='"
-            + name + "'", result -> { result.next();
+            + login + "'", result -> { result.next();
       return new UserProfile(result.getString(2));
     });
   }
