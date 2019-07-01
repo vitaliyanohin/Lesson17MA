@@ -8,6 +8,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import servlets.SessionsServlet;
 import servlets.SignInServlet;
 import servlets.SignUpServlet;
 
@@ -19,6 +20,7 @@ public class Main {
         accountService.addNewUser(new UserProfile("test"));
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.addServlet(new ServletHolder(new SessionsServlet(accountService)), "/mirror");
         context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
         context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
 
