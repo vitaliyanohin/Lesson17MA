@@ -13,7 +13,7 @@ public class AccountService {
 
   public void addNewUser(UserProfile userProfile) {
     try {
-      dbService.addUser(userProfile.getLogin());
+      dbService.addUser(userProfile);
     } catch (DBException e) {
       e.printStackTrace();
     }

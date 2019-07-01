@@ -21,15 +21,9 @@ public class UsersDAO {
     });
   }
 
-  public String getUserName(String name) throws SQLException {
-    return executor.execQuery("select * from users where user_name='"
-            + name + "'", result -> { result.next();
-      return result.getString(2);
-    });
-  }
-
-  public void insertUser(String name) throws SQLException {
-    executor.execUpdate("insert into users (user_name) values ('" + name + "')");
+  public void insertUser(UserProfile userProfile) throws SQLException {
+    executor.execUpdate("insert into users (user_name) values ('" + userProfile.getLogin() + "')");
+    executor.execUpdate("insert into users (password) values ('" + userProfile.getPass() + "')");
   }
 
   public void createTable() throws SQLException {

@@ -23,14 +23,14 @@ public class DBService {
     }
   }
 
-  public String addUser(String name) throws DBException {
+  public UserProfile addUser(UserProfile userProfile) throws DBException {
     try {
       connection.setAutoCommit(false);
       UsersDAO dao = new UsersDAO(connection);
       dao.createTable();
-      dao.insertUser(name);
+      dao.insertUser(userProfile);
       connection.commit();
-      return dao.getUserName(name);
+      return dao.getUserProfile(userProfile.getLogin());
     } catch (SQLException e) {
       try {
         connection.rollback();
