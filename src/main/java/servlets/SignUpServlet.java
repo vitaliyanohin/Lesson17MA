@@ -17,8 +17,7 @@ public class SignUpServlet extends HttpServlet {
     this.accountService = accountService;
   }
 
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) {
     String login = request.getParameterNames().nextElement();
     UserProfile userProfile = new UserProfile(login);
     accountService.addNewUser(userProfile);

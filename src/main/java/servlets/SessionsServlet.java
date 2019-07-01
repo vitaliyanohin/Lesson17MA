@@ -3,7 +3,6 @@ package servlets;
 import accounts.AccountService;
 import accounts.UserProfile;
 import com.google.gson.Gson;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,20 +18,16 @@ public class SessionsServlet extends HttpServlet {
   }
 
   public void doGet(HttpServletRequest request,
-                    HttpServletResponse response) throws ServletException, IOException {
-
+                    HttpServletResponse response) throws IOException {
     Map<String, Object> pageVariables = createPageVariablesMap(request);
     pageVariables.put("message", "");
-
     response.getWriter().println(request.getParameter("key"));
-
     response.setContentType("text/html;charset=utf-8");
     response.setStatus(HttpServletResponse.SC_OK);
-
   }
   //sign in
   public void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+          throws IOException {
     String login = request.getParameter("login");
     UserProfile profile = accountService.getUserByLogin(login);
     accountService.addSession(request.getSession().getId(), profile);
