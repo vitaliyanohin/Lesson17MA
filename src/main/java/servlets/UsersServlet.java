@@ -16,7 +16,7 @@ public class UsersServlet extends HttpServlet {
     this.accountService = accountService;
   }
 
-  //get public user profile
+  //getUserProfile public user profile
   public void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
 

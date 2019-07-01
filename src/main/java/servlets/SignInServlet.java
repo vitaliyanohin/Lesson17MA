@@ -17,14 +17,14 @@ public class SignInServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
           throws IOException {
     String login = request.getParameterNames().nextElement();
-    if (accountService.getUserByLogin(login) == null) {
-      response.setContentType("text/html;charset=utf-8");
-      response.getWriter().println("Unauthorized");
-      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-    } else {
-      response.setContentType("text/html;charset=utf-8");
-      response.getWriter().println("Authorized: " + request.getParameter("login"));
-      response.setStatus(HttpServletResponse.SC_OK);
-    }
+      if (accountService.getUserByLogin(login).getLogin() == null) {
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().println("Unauthorized");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+      } else {
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().println("Authorized: " + request.getParameter("login"));
+        response.setStatus(HttpServletResponse.SC_OK);
+      }
   }
 }
