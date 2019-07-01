@@ -1,7 +1,6 @@
 package servlets;
 
 import accounts.AccountService;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +15,8 @@ public class SignInServlet extends HttpServlet {
     this.accountService = accountService;
   }
 
-  //sign up
   public void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+          throws IOException {
     String login = request.getParameterNames().nextElement();
     if (accountService.getUserByLogin(login) == null) {
       response.setContentType("text/html;charset=utf-8");
@@ -29,17 +27,5 @@ public class SignInServlet extends HttpServlet {
       response.getWriter().println("Authorized: " + request.getParameter("login"));
       response.setStatus(HttpServletResponse.SC_OK);
     }
-  }
-
-  //change profile
-  public void doPut(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    //todo: module 2 home work
-  }
-
-  //unregister
-  public void doDelete(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    //todo: module 2 home work
   }
 }

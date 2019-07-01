@@ -17,13 +17,6 @@ public class SignUpServlet extends HttpServlet {
     this.accountService = accountService;
   }
 
-  //get public user profile
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-    //todo: module 2 home work
-  }
-
-  //sign up
   public void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     String login = request.getParameterNames().nextElement();
