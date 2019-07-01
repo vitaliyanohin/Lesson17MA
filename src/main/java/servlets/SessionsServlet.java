@@ -43,6 +43,5 @@ public class SessionsServlet extends HttpServlet {
       response.getWriter().println("Goodbye!");
       response.setStatus(HttpServletResponse.SC_OK);
     }
-
   }
 }
