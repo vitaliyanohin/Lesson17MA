@@ -14,16 +14,10 @@ public class AccountService {
   }
 
   public void addNewUser(UserProfile userProfile) {
-    try {
-      dbService.addUser(userProfile);
-    } catch (DBException e) {
-       e.printStackTrace();
-    }
+    dbService.addUser(userProfile);
   }
 
   public Optional<UserProfile> getUserByLogin(String login) {
     return Optional.ofNullable(dbService.getUser(login));
-
   }
-
 }

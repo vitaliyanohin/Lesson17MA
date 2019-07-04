@@ -19,12 +19,12 @@ public class DBService {
     try {
       return (new UsersDAO(connection).getUserProfile(login));
     } catch (SQLException e) {
-      e.printStackTrace();
+       e.printStackTrace();
     }
     return null;
   }
 
-  public UserProfile addUser(UserProfile userProfile) throws DBException {
+  public UserProfile addUser(UserProfile userProfile) {
     try {
       connection.setAutoCommit(false);
       UsersDAO dao = new UsersDAO(connection);
@@ -35,23 +35,25 @@ public class DBService {
     } catch (SQLException e) {
       try {
         connection.rollback();
-      } catch (SQLException ignore) {
+      } catch (SQLException ex) {
+         ex.printStackTrace();
       }
-      throw new DBException(e);
     } finally {
       try {
         connection.setAutoCommit(true);
-      } catch (SQLException ignore) {
+      } catch (SQLException e) {
+         e.printStackTrace();
       }
     }
+    return null;
   }
 
-  public void cleanUp() throws DBException {
+  public void cleanUp() {
     UsersDAO dao = new UsersDAO(connection);
     try {
       dao.dropTable();
     } catch (SQLException e) {
-      throw new DBException(e);
+       e.printStackTrace();
     }
   }
 
@@ -62,7 +64,7 @@ public class DBService {
       System.out.println("Driver: " + connection.getMetaData().getDriverName());
       System.out.println("Autocommit: " + connection.getAutoCommit());
     } catch (SQLException e) {
-      e.printStackTrace();
+       e.printStackTrace();
     }
   }
 
@@ -80,7 +82,7 @@ public class DBService {
       Connection connection = DriverManager.getConnection(url, name, pass);
       return connection;
     } catch (SQLException e) {
-      e.printStackTrace();
+       e.printStackTrace();
     }
     return null;
   }
