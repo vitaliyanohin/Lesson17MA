@@ -15,12 +15,13 @@ public class DBService {
     this.connection = getH2Connection();
   }
 
-  public UserProfile getUser(String login) throws DBException {
+  public UserProfile getUser(String login) {
     try {
       return (new UsersDAO(connection).getUserProfile(login));
     } catch (SQLException e) {
-        throw new DBException(e);
+      e.printStackTrace();
     }
+    return null;
   }
 
   public UserProfile addUser(UserProfile userProfile) throws DBException {

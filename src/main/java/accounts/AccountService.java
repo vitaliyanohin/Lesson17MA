@@ -3,6 +3,8 @@ package accounts;
 import dbService.DBException;
 import dbService.DBService;
 
+import java.util.Optional;
+
 public class AccountService {
   private DBService dbService;
 
@@ -15,16 +17,13 @@ public class AccountService {
     try {
       dbService.addUser(userProfile);
     } catch (DBException e) {
-      e.printStackTrace();
+       e.printStackTrace();
     }
   }
 
-  public UserProfile getUserByLogin(String login) {
-    try {
-      return dbService.getUser(login);
-    } catch (DBException e) {
-      e.printStackTrace();
-    }
-    return null;
+  public Optional<UserProfile> getUserByLogin(String login) {
+    return Optional.ofNullable(dbService.getUser(login));
+
   }
+
 }

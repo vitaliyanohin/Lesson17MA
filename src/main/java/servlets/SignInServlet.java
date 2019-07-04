@@ -17,7 +17,7 @@ public class SignInServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
           throws IOException {
     String login = request.getParameterNames().nextElement();
-      if (accountService.getUserByLogin(login).getLogin() == null) {
+      if (accountService.getUserByLogin(login).isPresent()) {
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println("Unauthorized");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
