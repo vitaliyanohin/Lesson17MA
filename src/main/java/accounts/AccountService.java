@@ -17,6 +17,6 @@ public class AccountService {
   }
 
   public Optional<UserProfile> getUserByLogin(String login) {
-    return Optional.ofNullable(dbService.getUser(login));
+    return dbService.getUser(login);
   }
 }
