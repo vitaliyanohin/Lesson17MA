@@ -1,6 +1,5 @@
 package accounts;
 
-import dbService.DBException;
 import dbService.DBService;
 
 import java.util.Optional;

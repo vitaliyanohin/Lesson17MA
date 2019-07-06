@@ -15,15 +15,16 @@ public class UsersDAO {
   }
 
   public UserProfile getUserProfile(String login) throws SQLException {
-    return executor.execQuery("select * from users where user_name='"
-            + login + "'", result -> { result.next();
-      return new UserProfile(result.getString(2));
-    });
+    return executor.execQuery("select * from users where user_name='" + login + "'",
+            result -> {
+                      result.next();
+                      return new UserProfile(result.getString(2));
+                      });
   }
 
   public void insertUser(UserProfile userProfile) throws SQLException {
-    executor.execUpdate("insert into users (user_name) values ('" + userProfile.getLogin() + "')");
-    executor.execUpdate("insert into users (password) values ('" + userProfile.getPass() + "')");
+    executor.execUpdate("insert into users (user_name, password) values "
+            + "('" + userProfile.getEmail() + "', " + "'" + userProfile.getPass() + "');");
   }
 
   public void createTable() throws SQLException {

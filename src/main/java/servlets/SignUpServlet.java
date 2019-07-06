@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SignUpServlet extends HttpServlet {
-  @SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"}) //todo: remove after module 2 home work
+
+  @SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
   private final AccountService accountService;
 
   public SignUpServlet(AccountService accountService) {
