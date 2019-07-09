@@ -25,7 +25,7 @@ public class DBService {
     try {
       return  Optional.of(new UsersDAO(connection).getUserProfile(login));
     } catch (SQLException e) {
-       LOGGER.log(Level.ALL, "Error: ", e);
+       LOGGER.log(Level.ERROR, "Failed to get user by login: ", e);
     }
     return Optional.empty();
   }
@@ -39,16 +39,17 @@ public class DBService {
       connection.commit();
       return Optional.of(dao.getUserProfile(userProfile.getLogin()));
     } catch (SQLException e) {
+       LOGGER.log(Level.ERROR, "Failed to set user: ", e);
       try {
         connection.rollback();
       } catch (SQLException ex) {
-         LOGGER.log(Level.ALL, "Error: ", ex);
+         LOGGER.log(Level.ERROR, "Failed to rollback user: ", ex);
       }
     } finally {
       try {
         connection.setAutoCommit(true);
       } catch (SQLException e) {
-         LOGGER.log(Level.ALL, "Error: ", e);
+         LOGGER.log(Level.ERROR, "Failed to set AutoCommit: ", e);
       }
     }
     return Optional.empty();
@@ -59,18 +60,18 @@ public class DBService {
     try {
       dao.dropTable();
     } catch (SQLException e) {
-       LOGGER.log(Level.ALL, "Error: ", e);
+       LOGGER.log(Level.ERROR, "Failed to drop table: ", e);
     }
   }
 
   public void printConnectInfo() {
     try {
-      System.out.println("DB name: " + connection.getMetaData().getDatabaseProductName());
-      System.out.println("DB version: " + connection.getMetaData().getDatabaseProductVersion());
-      System.out.println("Driver: " + connection.getMetaData().getDriverName());
-      System.out.println("Autocommit: " + connection.getAutoCommit());
+      LOGGER.info("DB name: " + connection.getMetaData().getDatabaseProductName());
+      LOGGER.info("DB version: " + connection.getMetaData().getDatabaseProductVersion());
+      LOGGER.info("Driver: " + connection.getMetaData().getDriverName());
+      LOGGER.info("Autocommit: " + connection.getAutoCommit());
     } catch (SQLException e) {
-       LOGGER.log(Level.ALL, "Error: ", e);
+       LOGGER.log(Level.ERROR, "Failed to get table status: ", e);
     }
   }
 
@@ -88,7 +89,7 @@ public class DBService {
       Connection connection = DriverManager.getConnection(url, name, pass);
       return connection;
     } catch (SQLException e) {
-       LOGGER.log(Level.ALL, "Error: ", e);
+       LOGGER.log(Level.ERROR, "Failed to get connection: ", e);
     }
     return null;
   }
